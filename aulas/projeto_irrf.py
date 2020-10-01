@@ -1,5 +1,3 @@
-
-
 class Employee:
     """Dados do funcionário"""
     def __init__(self, name, salary, dependents):
@@ -8,66 +6,49 @@ class Employee:
         self.dependents = dependents
         self.dependent_value = 189.59
     
-    def check_dependents(self):
+
+class IRRF(Employee):
+    def __init__(self, name, salary, dependents, aliquot_inss, aliquot_irrf, parcel):
+        super().__init__(name, salary, dependents)
+        self.aliquot_inss = aliquot_inss
+        self.aliquot_irrf = aliquot_irrf
+        self.parcel = parcel
+
+    def get_dependents_value(self):
+        """Verifica a quantidade de dependentes para calculo do salário familia"""
         if self.dependents == 1:
             return self.dependent_value
         elif self.dependents >= 2:
             return self.dependents * self.dependent_value
         else:
-            return "Você não tem direito ao salário família"
-       
-d1 = Employee("Julio", 2000.00, 0)
-print(d1.check_dependents())
+            return 0.0
 
-class INSS(Employee):
-    """Define a aliquota do INSS"""
-    def __init__(self, name, salary, dependents, aliquot):
-        super().__init__(name, salary, dependents)
-        self.aliquot = aliquot
+    def discount_inss(self):
+        """Calcula e retorna o valor do desconto de INSS"""
+        return self.salary * self.aliquot_inss
+    
+    def salary_base_irrf(self):
+        """Calcula salário e retorna desconto de INSS"""
+        return self.salary - self.discount_inss()
 
-    def subtract(self):
-        return self.salary * self.aliquot
+    def discount_dependents(self):
+        """Calcula o salário família pela quantidade de dependentes"""
+        return self.salary_base_irrf() - self.get_dependents_value()
 
-    def basis(self):
-        return self.salary - self.subtract()
+    def discount_aliquot_irrf(self):
+        """Calcula o IRRF com a porcentagem e parcela a deduzir"""
+        return (self.discount_dependents() * self.aliquot_irrf) - self.parcel 
 
-i1 = INSS('Julio', 2900.00, 1, 0.11)
-print(i1.subtract())
-print(i1.basis())
+    def liquid_salary(self):
+        """Calcula o salário líquido com o desconto de INSS e IRRF"""
+        return self.salary - self.discount_inss() - self.discount_aliquot_irrf()
 
-class IRRF(Employee):
-    def __init__(self, name, salary, dependents, aliquot, parcel):
-        super().__init__(name, salary, dependents)
-        self.__aliquot = aliquot
-        self.parcel = parcel
 
-  
+
+irrf_2020 = IRRF('Julio', 2900.00, 1, 0.11, 0.075, 142.80)
+print(irrf_2020 .liquid_salary()) 
+print(irrf_2020 .discount_aliquot_irrf())
+
+    
         
-        
 
-
-
-
-# income = 2826.65
-# dependent = 1
-# INSS = 0.11
-# if income <= 1903.98:
-#     aliquot = 0.0       # Bloco #1
-# elif income <= 2826.65:
-#     c_inss = income * INSS
-#     b_irrf = income - c_inss
-#     v_dependent = 189.59
-#     s_b_irrf = b_irrf - v_dependent
-#     aliquot = 0.075 
-#     d_aliquot = abs((s_b_irrf * aliquot) - v_dependent)    # Bloco #2
-#     s_liquido = income - c_inss - d_aliquot
-#     print('Meu salario líquido será de', s_liquido, 'e meu desconto do IRPF será de', d_aliquot )
-# elif income <= 3751.05:
-#     income_base = 2826.65
-#     aliquot = 0.15       # Bloco #3
-# elif income <= 4664.68:
-#     aliquot = 0.225
-#     income_base = 3751.05
-# else:  
-#     income_base = 4664.68   
-#     aliquot = 0.275     # # Bloco #4
