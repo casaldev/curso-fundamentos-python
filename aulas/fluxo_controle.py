@@ -49,7 +49,7 @@ elif salary >= 1903.99:
 
 
 
-order_total = 50    # Total do pedido
+order_total = 200    # Total do pedido
 
 # Forma clássica de if/else
 if order_total > 100:
