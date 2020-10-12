@@ -64,11 +64,14 @@
 # maxs = map(lambda n: max(*n), zip(a, b, c))
 # print(_(maxs))
 
-_=list
-test = [2, 5, 8, 0, 0, 1, 0]
-print(_(filter(None, test)))
-print(_(filter(lambda x: x, test)))         # equivalente ao anterior
-print(_(filter(lambda x: x > 4, test)))     # mantenha somente os items > 4
+# _=list
+# test = [2, 5, 8, 0, 0, 1, 0]
+# print(_(filter(None, test)))
+# print(_(filter(lambda x: x, test)))         # equivalente ao anterior
+# print(_(filter(lambda x: x > 4, test)))     # mantenha somente os items > 4
+
+
+
 
 
 
