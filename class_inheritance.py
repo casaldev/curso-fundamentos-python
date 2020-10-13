@@ -37,7 +37,7 @@ class CityCar(Car):                         # É um carro
 
     
 class F1Car(RaceCar):                       # É um carro de corrida e também é um carro
-    pass                                    # engine_cls a mesma coisa que a mãe
+    pass                                    # engine_cls a mesma coisa que a Pai
 
 
 car = Car()
