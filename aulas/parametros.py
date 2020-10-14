@@ -83,6 +83,7 @@
 # func(**dict(a=1, b=42))
 
 
+
 # def kwo(*a, c):
 #     print(a, c)
 
@@ -129,9 +130,8 @@
 #     print(a)
 #     print(b)
 #     print('#' * 12)
-#     a.append(len(a))   # isto afetará o valor padrão de um
-#     b[len(a)] = len(a)  # e isto afetará a b's one
-
+#     a.append(len(a))      # isto afetará o valor padrão dos a's
+#     b[len(a)] = len(a)    # isto afetará o valor padrão dos b's
 # func()
 # func()
 # func()
@@ -143,9 +143,9 @@
 #     a.append(len(a))   # isto afetará o valor padrão de um
 #     b[len(a)] = len(a)  # e isto afetará a b's one
 
-# func()
-# func(a=[1, 2, 3], b={'B': 1})
-# func()
+func()
+func(a=[1, 2, 3], b={'B': 1})
+func()
 
 def func(a=None):
     if a is None:
